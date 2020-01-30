@@ -8,24 +8,20 @@ import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 
 //ContextAPI
-import {ProductContext} from './contexts/ProductContext';
-import {CartContext} from './contexts/CartContext';
+import ProductContext from './contexts/ProductContext';
+import CartContext from './contexts/CartContext';
 function App() {
 	const [products] = useState(data);
 	const [cart, setCart] = useState([]);
 
 	const addItem = item => {
-		const newItem = { 
-			item: item,
-			id: Date.now()
-		};
-		setCart([...cart, newItem]);
+		setCart([...cart, item]);
 	};
 
 	return (
 		<div className="App">
 			<ProductContext.Provider value={{ products, addItem }}>
-			<CartContext.Provider value={{ cart }}>
+			<CartContext.Provider value={ cart }>
 			<Navigation cart={cart} />
 					<Route exact path="/" component={Products} />
 					<Route path="/cart" component={ShoppingCart} />
